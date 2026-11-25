@@ -1,57 +1,329 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Bloodsystem — North Unity Webradio</title>
-<style>
-:root{--bg:#090a09;--card:#171a17;--cream:#eee9dc;--muted:#aaa99f;--gold:#d3a83d;--red:#a91518}
-*{box-sizing:border-box}body{margin:0;background:
-radial-gradient(circle at 20% 0%,rgba(169,21,24,.18),transparent 32%),
-radial-gradient(circle at 85% 20%,rgba(105,125,69,.16),transparent 30%),var(--bg);
-color:var(--cream);font-family:Arial,Helvetica,sans-serif}
-.wrap{width:min(1000px,calc(100% - 30px));margin:auto}
-header{padding:28px 0}
-.back{display:inline-block;color:var(--gold);text-transform:uppercase;letter-spacing:.1em;font-size:.75rem;text-decoration:none;margin-bottom:25px}
-.brand{font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:.8rem;color:#aaa}
-main{padding:25px 0 80px}
-.grid{display:grid;grid-template-columns:minmax(250px,380px) 1fr;gap:42px;align-items:start}
-.cover{width:100%;aspect-ratio:1/1;object-fit:cover;border:1px solid rgba(255,255,255,.13);border-radius:6px;box-shadow:0 20px 55px rgba(0,0,0,.5)}
-.kicker{color:var(--gold);text-transform:uppercase;letter-spacing:.16em;font-size:.75rem;font-weight:bold}
-h1{font-size:clamp(2.5rem,7vw,5.5rem);line-height:.9;margin:8px 0 22px;text-transform:uppercase;letter-spacing:-.05em}
-p{color:var(--muted);line-height:1.7}
-.media{margin-top:28px;padding:20px;background:var(--card);border:1px solid rgba(255,255,255,.1);border-radius:6px}
-.media a{display:inline-block;color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.15);padding:10px 14px;margin:5px 5px 0 0;font-size:.8rem;text-transform:uppercase}
-@media(max-width:700px){.grid{grid-template-columns:1fr;gap:25px}}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-.media-block{margin:0 0 22px}
-.media-title{color:#d3a83d;text-transform:uppercase;letter-spacing:.14em;font-size:.72rem;font-weight:700;margin-bottom:9px}
-.video{position:relative;aspect-ratio:16/9;background:#000;border-radius:5px;overflow:hidden}
-.video iframe,.special-player{width:100%;height:100%;border:0;display:block}
-.audio-player{width:100%;height:352px;border:0;border-radius:6px;background:#111}
-.special-player{height:352px;background:#111;border-radius:6px}
-.empty{padding:25px;color:#aaa;background:#111;border:1px solid rgba(255,255,255,.1);border-radius:6px}
-</style>
+  <title>BloodSystem | North Unity Webradio</title>
+
+  <style>
+    :root {
+      --bg: #111111;
+      --panel: #1b1b1b;
+      --text: #f5f1e8;
+      --muted: #b9b4aa;
+      --red: #e32c14;
+      --gold: #e9ad20;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .artist-page {
+      width: min(1100px, 92%);
+      margin: 50px auto;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 25px;
+      color: var(--gold);
+      font-size: 14px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .artist-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+      gap: 35px;
+      align-items: center;
+      margin-bottom: 45px;
+    }
+
+    .artist-cover {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+      border: 1px solid #383838;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+    }
+
+    .artist-tag {
+      color: var(--red);
+      font-size: 13px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .artist-title {
+      margin: 8px 0 18px;
+      font-size: clamp(38px, 6vw, 72px);
+      line-height: 1;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .artist-title span {
+      color: var(--gold);
+    }
+
+    .artist-bio {
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .artist-bio p {
+      margin: 0 0 15px;
+    }
+
+    .artist-section {
+      margin-top: 45px;
+      padding: 30px;
+      background: var(--panel);
+      border: 1px solid #303030;
+      border-radius: 8px;
+    }
+
+    .section-title {
+      margin: 0 0 22px;
+      font-size: 25px;
+      font-weight: 800;
+      text-transform: uppercase;
+      border-left: 4px solid var(--red);
+      padding-left: 14px;
+    }
+
+    .track-player {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .track-player iframe {
+      display: block;
+      width: 100%;
+      height: 442px;
+      border: 0;
+      border-radius: 4px;
+    }
+
+    .artist-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .artist-button {
+      display: inline-block;
+      padding: 12px 18px;
+      background: #252525;
+      border: 1px solid #444;
+      border-radius: 4px;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: bold;
+      transition: 0.2s ease;
+    }
+
+    .artist-button:hover {
+      background: var(--red);
+      border-color: var(--red);
+      transform: translateY(-2px);
+    }
+
+    .artist-button.primary {
+      background: var(--red);
+      border-color: var(--red);
+    }
+
+    .artist-button.primary:hover {
+      background: #b82210;
+    }
+
+    .artist-contact {
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .artist-contact a {
+      color: var(--gold);
+    }
+
+    @media (max-width: 750px) {
+      .artist-page {
+        margin: 25px auto;
+      }
+
+      .artist-header {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      .artist-cover {
+        max-width: 550px;
+        margin: 0 auto;
+      }
+
+      .artist-section {
+        padding: 20px;
+        margin-top: 30px;
+      }
+
+      .artist-title {
+        font-size: 44px;
+      }
+
+      .artist-button {
+        flex: 1 1 140px;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<header><div class="wrap">
-<a class="back" href="../index.html#artistes">← Retour aux artistes</a>
-<div class="brand">North Unity Webradio</div>
-</div></header>
-<main><div class="wrap">
-<div class="grid">
-<div><img class="cover" src="https://i.ibb.co/k4QxPKM/Bloodsystem.jpg" alt="Bloodsystem"></div>
-<div>
-<div class="kicker">Artiste / Selecta / Sound</div>
-<h1>Bloodsystem</h1>
-<p>Retrouve Bloodsystem dans l'univers de North Unity Webradio — Roots, Reggae, Dancehall & Dub.</p>
-<div class="media">
-<div class="media-block">
-  <div class="media-title">Vidéo</div>
-  <div class="video"><iframe src="https://www.youtube.com/embed/kBj1MdJ6SiI" title="Bloodsystem — vidéo YouTube" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
-</div></div>
-</div>
-</div>
-</div></main>
+
+  <main class="artist-page">
+
+    <a class="back-link" href="../index.html#artistes">
+      ← Retour aux artistes
+    </a>
+
+    <section class="artist-header">
+
+      <div>
+        <img
+          class="artist-cover"
+          src="../images/bloodsystem.jpg"
+          alt="BloodSystem – Braquage vocal, On est al"
+        >
+      </div>
+
+      <div class="artist-info">
+
+        <div class="artist-tag">
+          North Unity présente
+        </div>
+
+        <h1 class="artist-title">
+          Blood<span>System</span>
+        </h1>
+
+        <div class="artist-bio">
+
+          <p>
+            BloodSystem est un artiste français évoluant dans
+            l’univers du reggae et du ragga. Passionné de musique
+            depuis l’adolescence, il explore d’abord le rock,
+            puis le hip-hop, avant de se consacrer au reggae
+            à partir de 2008.
+          </p>
+
+          <p>
+            Auteur et interprète, il développe un style d’écriture
+            personnel et se produit sur scène ainsi qu’en sound
+            system. En 2011, il fonde dB Project avec son ami
+            Double D, alias Desch.
+          </p>
+
+          <p>
+            BloodSystem poursuit également son parcours solo,
+            notamment à travers des collaborations avec le
+            Bakoua Sound.
+          </p>
+
+        </div>
+      </div>
+
+    </section>
+
+    <section class="artist-section">
+
+      <h2 class="section-title">
+        Découvrir l’artiste
+      </h2>
+
+      <div class="track-player">
+
+        <iframe
+          src="https://bandcamp.com/EmbeddedPlayer/track=1230509697/size=large/bgcol=333333/linkcol=e32c14/tracklist=false/transparent=true/"
+          title="BloodSystem – Même combat"
+          loading="lazy"
+          allow="autoplay"
+          seamless>
+          <a href="https://bloodsystem.bandcamp.com/track/m-me-combat">
+            Même combat de BloodSystem BS
+          </a>
+        </iframe>
+
+      </div>
+
+    </section>
+
+    <section class="artist-section">
+
+      <h2 class="section-title">
+        Retrouvez BloodSystem
+      </h2>
+
+      <div class="artist-links">
+
+        <a
+          class="artist-button primary"
+          href="https://bloodsystem.bandcamp.com/"
+          target="_blank"
+          rel="noopener noreferrer">
+          Bandcamp
+        </a>
+
+        <a
+          class="artist-button"
+          href="https://open.spotify.com/intl-fr/artist/0SoWj5kUi8rlLvdVVaJXUV"
+          target="_blank"
+          rel="noopener noreferrer">
+          Spotify
+        </a>
+
+        <a
+          class="artist-button"
+          href="https://www.facebook.com/BloodSystem.BS"
+          target="_blank"
+          rel="noopener noreferrer">
+          Facebook
+        </a>
+
+      </div>
+
+      <p class="artist-contact">
+        Contact :
+        <a href="mailto:bloodsystem59500@gmail.com">
+          bloodsystem59500@gmail.com
+        </a>
+      </p>
+
+    </section>
+
+  </main>
+
 </body>
 </html>
